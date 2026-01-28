@@ -23,31 +23,30 @@ export function Header() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-sm border-b border-border">
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-navy/90 backdrop-blur-lg border-b border-white/10 py-3 shadow-xl">
       <nav className="container-custom">
-        <div className="flex items-center justify-between h-16 md:h-20">
+        <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-lg gradient-hero flex items-center justify-center">
-              <span className="text-primary-foreground font-display font-bold text-lg">CS</span>
+          <Link to="/" className="flex items-center gap-2 group">
+            <div className="w-10 h-10 rounded-xl bg-teal flex items-center justify-center transition-transform group-hover:scale-110 shadow-lg shadow-teal/20">
+              <span className="text-white font-black text-lg">CS</span>
             </div>
             <div className="hidden sm:block">
-              <span className="font-display font-bold text-lg text-foreground">CleanStaff</span>
-              <span className="block text-xs text-muted-foreground -mt-1">Solutions</span>
+              <span className="font-black text-xl text-white transition-colors">CleanStaff</span>
+              <span className="block text-[10px] uppercase font-bold tracking-[0.2em] -mt-1 text-white/60">Solutions</span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-2">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                  isActive(item.href)
-                    ? "text-primary bg-secondary"
-                    : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
-                }`}
+                className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${isActive(item.href)
+                    ? "text-teal bg-white/10"
+                    : "text-white/80 hover:text-white hover:bg-white/5"
+                  }`}
               >
                 {item.name}
               </Link>
@@ -55,15 +54,15 @@ export function Header() {
           </div>
 
           {/* CTA Buttons */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-6">
             <a
               href="tel:+254700000000"
-              className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className="flex items-center gap-2 text-sm font-bold transition-colors text-white/80 hover:text-white"
             >
-              <Phone className="w-4 h-4" />
+              <Phone className="w-4 h-4 text-teal" />
               <span className="hidden xl:inline">+254 700 000 000</span>
             </a>
-            <Button asChild variant="default" className="gradient-hero border-0">
+            <Button asChild size="lg" className="premium-button px-6 h-12 font-black shadow-xl bg-white text-navy hover:bg-teal hover:text-white shadow-white/10 transition-all">
               <Link to="/contact">Request Quote</Link>
             </Button>
           </div>
@@ -71,7 +70,7 @@ export function Header() {
           {/* Mobile Menu Button */}
           <button
             type="button"
-            className="lg:hidden p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary"
+            className="lg:hidden p-2 rounded-md text-white/70 hover:text-white hover:bg-white/10"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -86,25 +85,24 @@ export function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-card border-b border-border overflow-hidden"
+            className="lg:hidden bg-navy border-b border-white/10 overflow-hidden"
           >
-            <div className="container-custom py-4 space-y-2">
+            <div className="container-custom py-6 space-y-2">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`block px-4 py-3 rounded-md text-base font-medium transition-colors ${
-                    isActive(item.href)
-                      ? "text-primary bg-secondary"
-                      : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
-                  }`}
+                  className={`block px-4 py-3 rounded-xl text-base font-bold transition-all ${isActive(item.href)
+                      ? "text-teal bg-white/10"
+                      : "text-white/70 hover:text-white hover:bg-white/5"
+                    }`}
                 >
                   {item.name}
                 </Link>
               ))}
-              <div className="pt-4 border-t border-border">
-                <Button asChild className="w-full gradient-hero border-0">
+              <div className="pt-6 border-t border-white/10">
+                <Button asChild className="w-full premium-button bg-white text-navy hover:bg-teal hover:text-white font-black h-14">
                   <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
                     Request a Quote
                   </Link>
@@ -117,3 +115,4 @@ export function Header() {
     </header>
   );
 }
+

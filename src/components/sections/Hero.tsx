@@ -6,26 +6,33 @@ import { fadeInUp, staggerContainer } from "@/components/ui/PageTransition";
 
 export function Hero() {
   return (
-    <section className="relative gradient-hero overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }} />
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-navy">
+      {/* Background Image with Responsive Handling */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/hero-image.png"
+          alt="Professional Cleaning Staff"
+          className="w-full h-full object-cover object-center lg:object-[center_30%] transition-transform duration-1000 scale-100"
+        />
+        {/* Advanced Multi-layer Overlay for Readability */}
+        <div className="absolute inset-0 bg-navy/70 backdrop-blur-[1px]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/20 to-transparent" />
+        <div className="absolute inset-0 bg-grid-white opacity-5" />
       </div>
 
-      <div className="container-custom relative">
-        <div className="py-20 md:py-28 lg:py-36">
+      <div className="container-custom relative z-10 w-full">
+        <div className="py-20 md:py-32">
           <motion.div
             variants={staggerContainer}
             initial="hidden"
             animate="show"
-            className="max-w-3xl"
+            className="max-w-4xl"
           >
             {/* Badge */}
-            <motion.div variants={fadeInUp} className="mb-6">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground text-sm font-medium">
-                <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+            <motion.div variants={fadeInUp} className="mb-8">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-morphism border border-white/20 text-teal-light text-xs md:text-sm font-bold uppercase tracking-widest">
+                <span className="w-2 h-2 rounded-full bg-teal animate-pulse" />
                 Trusted by 50+ Organizations in Nairobi
               </span>
             </motion.div>
@@ -33,72 +40,76 @@ export function Hero() {
             {/* Headline */}
             <motion.h1
               variants={fadeInUp}
-              className="heading-xl text-primary-foreground mb-6"
+              className="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-8 tracking-tighter leading-[1.05] text-balance drop-shadow-2xl"
             >
-              Professional Managed Cleaning Staff for Hotels, Hospitals & Commercial Spaces
+              Professional Managed <br className="hidden md:block" />
+              <span className="text-teal-light">Cleaning Staff</span> Solutions
             </motion.h1>
 
             {/* Subtext */}
             <motion.p
               variants={fadeInUp}
-              className="text-lg md:text-xl text-primary-foreground/80 mb-8 leading-relaxed"
+              className="text-lg md:text-2xl text-white/80 max-w-2xl mb-12 leading-relaxed drop-shadow-md"
             >
-              We provide trained, supervised, and reliable cleaning personnel under flexible contracts. 
-              No more HR headaches, absenteeism issues, or supervision concerns—we handle it all.
+              We provide trained, supervised, and reliable cleaning personnel under flexible contracts.
+              No more HR headaches—we handle the recruitment, training, and 24/7 on-site management.
             </motion.p>
 
             {/* CTAs */}
-            <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4">
+            <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-6 mb-16">
               <Button
                 asChild
                 size="lg"
-                className="bg-accent hover:bg-teal-light text-accent-foreground font-semibold px-8"
+                className="premium-button bg-teal hover:bg-teal-light text-white border-none px-12 h-16 text-lg font-black shadow-2xl shadow-teal/20"
               >
                 <Link to="/contact">
                   Request a Quote
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  <ArrowRight className="ml-3 w-6 h-6 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
               <Button
                 asChild
                 variant="outline"
                 size="lg"
-                className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+                className="h-16 px-10 border-white/40 text-white hover:bg-white/20 glass-morphism text-lg font-bold border-2 transition-all"
               >
                 <Link to="/how-it-works">
-                  <Play className="mr-2 w-5 h-5" />
-                  How It Works
+                  <Play className="mr-3 w-6 h-6 fill-current" />
+                  See How It Works
                 </Link>
               </Button>
             </motion.div>
 
-            {/* Stats */}
+            {/* Floating Info Cards (Responsive Grid) */}
             <motion.div
               variants={fadeInUp}
-              className="mt-12 pt-8 border-t border-primary-foreground/20 grid grid-cols-3 gap-8"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-6 border-t border-white/10 pt-12"
             >
-              <div>
-                <div className="text-3xl md:text-4xl font-display font-bold text-primary-foreground">
-                  500+
+              {[
+                { label: "Staff Deployed", value: "500+", desc: "Vetted & Trained" },
+                { label: "Active Clients", value: "50+", desc: "Hotels & Hospitals" },
+              ].map((stat, i) => (
+                <div key={i} className="glass-card p-6 rounded-2xl hover:bg-white/10 transition-colors group">
+                  <div className="text-3xl font-black text-white group-hover:text-teal-light transition-colors">{stat.value}</div>
+                  <div className="text-xs text-white/50 uppercase tracking-widest font-bold mt-1 mb-2">{stat.label}</div>
+                  <div className="text-xs text-white/30 font-medium">{stat.desc}</div>
                 </div>
-                <div className="text-sm text-primary-foreground/70">Staff Deployed</div>
-              </div>
-              <div>
-                <div className="text-3xl md:text-4xl font-display font-bold text-primary-foreground">
-                  50+
-                </div>
-                <div className="text-sm text-primary-foreground/70">Active Clients</div>
-              </div>
-              <div>
-                <div className="text-3xl md:text-4xl font-display font-bold text-primary-foreground">
-                  10+
-                </div>
-                <div className="text-sm text-primary-foreground/70">Years Experience</div>
-              </div>
+              ))}
             </motion.div>
           </motion.div>
         </div>
       </div>
+
+      {/* Dynamic Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2, duration: 1, repeat: Infinity, repeatType: 'reverse' }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 hidden md:flex flex-col items-center gap-2"
+      >
+        <span className="text-[10px] text-white/30 font-bold uppercase tracking-[0.3em]">Scroll</span>
+        <div className="w-[1px] h-12 bg-gradient-to-b from-teal/50 to-transparent" />
+      </motion.div>
     </section>
   );
 }

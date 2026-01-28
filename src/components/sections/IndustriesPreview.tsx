@@ -8,28 +8,28 @@ const industries = [
   {
     title: "Hotels & Lodges",
     description: "Housekeeping staff trained in hospitality standards for guest satisfaction.",
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop",
+    image: "/service-hotel.png",
   },
   {
     title: "Hospitals & Clinics",
     description: "Staff trained in infection control and healthcare facility protocols.",
-    image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&h=400&fit=crop",
+    image: "/service-hospital.png",
   },
   {
     title: "Apartments & Estates",
     description: "Reliable cleaning teams for residential properties and common areas.",
-    image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&h=400&fit=crop",
+    image: "/hero-image.png",
   },
   {
     title: "Offices & NGOs",
     description: "Professional cleaning personnel for corporate and institutional environments.",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop",
+    image: "/service-office.png",
   },
 ];
 
 export function IndustriesPreview() {
   return (
-    <section className="section-padding">
+    <section className="py-24 bg-white dark:bg-navy relative overflow-hidden">
       <div className="container-custom">
         <motion.div
           variants={staggerContainer}
@@ -38,50 +38,55 @@ export function IndustriesPreview() {
           viewport={{ once: true, margin: "-50px" }}
         >
           {/* Header */}
-          <motion.div variants={fadeInUp} className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-accent font-medium text-sm uppercase tracking-wider">
-              Industries We Serve
+          <motion.div variants={fadeInUp} className="text-center max-w-3xl mx-auto mb-16">
+            <span className="inline-block px-3 py-1 mb-4 rounded-full bg-teal/10 text-teal text-xs font-bold uppercase tracking-widest">
+              Specialized Staffing
             </span>
-            <h2 className="heading-lg text-foreground mt-2 mb-4">
-              Tailored Solutions for Every Sector
+            <h2 className="text-4xl md:text-5xl font-extrabold text-navy mb-6 tracking-tight leading-[1.1]">
+              Tailored Solutions for <span className="text-teal">Every Sector</span>
             </h2>
-            <p className="body-lg">
-              We understand that different industries have unique cleaning requirements. 
-              Our staff are trained specifically for your sector's needs.
+            <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+              We understand that different industries have unique protocols.
+              Our personnel are rigorously trained specifically for your sector's standards.
             </p>
           </motion.div>
 
           {/* Industries Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-4 md:px-0">
             {industries.map((industry, index) => (
               <motion.div
                 key={index}
                 variants={fadeInUp}
-                className="group relative overflow-hidden rounded-lg h-64 md:h-72"
+                className="group relative h-[350px] md:h-[400px] rounded-3xl overflow-hidden shadow-2xl transition-all duration-700 hover:shadow-teal/20"
               >
                 <img
                   src={industry.image}
                   alt={industry.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="font-display font-bold text-xl text-primary-foreground mb-2">
+
+                {/* Modern Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/40 to-transparent transition-opacity duration-500 group-hover:opacity-90" />
+
+                {/* Content */}
+                <div className="absolute bottom-0 left-0 right-0 p-8 md:p-10 transform transition-transform duration-500 group-hover:translate-y-[-10px]">
+                  <h3 className="text-2xl md:text-3xl font-black text-white mb-3 tracking-tight group-hover:text-teal-light transition-colors">
                     {industry.title}
                   </h3>
-                  <p className="text-primary-foreground/80 text-sm">
+                  <p className="text-white/70 text-base md:text-lg leading-relaxed max-w-md opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 mb-6">
                     {industry.description}
                   </p>
+                  <div className="h-1 w-0 bg-teal transition-all duration-500 group-hover:w-full rounded-full" />
                 </div>
               </motion.div>
             ))}
           </div>
 
           {/* CTA */}
-          <motion.div variants={fadeInUp} className="mt-12 text-center">
-            <Button asChild size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+          <motion.div variants={fadeInUp} className="mt-16 text-center">
+            <Button asChild size="lg" variant="outline" className="premium-button border-navy/30 bg-navy/5 text-navy hover:bg-navy hover:text-white px-10 h-14 text-base font-bold transition-all duration-300 border-2">
               <Link to="/industries">
-                Explore All Industries
+                Explore All Sectors
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
             </Button>
@@ -91,3 +96,4 @@ export function IndustriesPreview() {
     </section>
   );
 }
+
