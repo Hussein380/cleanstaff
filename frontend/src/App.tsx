@@ -11,6 +11,12 @@ import HowItWorks from "./pages/HowItWorks";
 import Industries from "./pages/Industries";
 import WhyUs from "./pages/WhyUs";
 import Contact from "./pages/Contact";
+import Operations from "./pages/Operations";
+import Staff from "./pages/Staff";
+import Jobs from "./pages/Jobs";
+import Quality from "./pages/Quality";
+import Inventory from "./pages/Inventory";
+import ClientPortal from "./pages/ClientPortal";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +36,12 @@ const App = () => (
               <Route path="/industries" element={<Industries />} />
               <Route path="/why-us" element={<WhyUs />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/operations" element={<Operations />} />
+              <Route path="/staff" element={<Staff />} />
+              <Route path="/jobs" element={<Jobs />} />
+              <Route path="/quality" element={<Quality />} />
+              <Route path="/inventory" element={<Inventory />} />
+              <Route path="/portal" element={<ClientPortal />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

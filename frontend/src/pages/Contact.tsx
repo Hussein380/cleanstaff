@@ -89,8 +89,8 @@ export default function Contact() {
   return (
     <PageTransition>
       {/* Hero Section */}
-      <section className="gradient-hero py-16 md:py-24">
-        <div className="container-custom">
+      <section className="gradient-hero pt-32 pb-20 md:pt-48 md:pb-32">
+        <div className="container-custom relative z-10">
           <motion.div
             variants={staggerContainer}
             initial="hidden"
@@ -99,21 +99,21 @@ export default function Contact() {
           >
             <motion.span
               variants={fadeInUp}
-              className="text-accent font-medium text-sm uppercase tracking-wider"
+              className="text-teal-light font-bold text-sm uppercase tracking-[0.2em]"
             >
               Contact Us
             </motion.span>
             <motion.h1
               variants={fadeInUp}
-              className="heading-xl text-primary-foreground mt-2 mb-4"
+              className="heading-xl text-white mt-4 mb-6"
             >
               Request a Quote
             </motion.h1>
             <motion.p
               variants={fadeInUp}
-              className="text-lg text-primary-foreground/80"
+              className="text-lg md:text-xl text-white/70 leading-relaxed"
             >
-              Tell us about your cleaning staff requirements. We'll respond with a 
+              Tell us about your cleaning staff requirements. We'll respond with a
               customized proposal within 24-48 hours.
             </motion.p>
           </motion.div>
@@ -166,7 +166,7 @@ export default function Contact() {
               viewport={{ once: true, margin: "-50px" }}
               className="lg:col-span-2"
             >
-              <motion.div variants={fadeInUp} className="card-elevated p-6 md:p-8">
+              <motion.div variants={fadeInUp} className="glass-card p-6 md:p-10 rounded-3xl border-white/10">
                 {isSubmitted ? (
                   <div className="text-center py-12">
                     <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
@@ -176,7 +176,7 @@ export default function Contact() {
                       Thank You!
                     </h3>
                     <p className="text-muted-foreground mb-6">
-                      Your quote request has been submitted successfully. Our team will 
+                      Your quote request has been submitted successfully. Our team will
                       review your requirements and get back to you within 24-48 hours.
                     </p>
                     <Button
@@ -325,7 +325,7 @@ export default function Contact() {
                     <Button
                       type="submit"
                       size="lg"
-                      className="w-full gradient-hero border-0"
+                      className="w-full premium-button bg-teal hover:bg-teal-light text-white border-none h-14 text-lg font-black mt-4"
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? (

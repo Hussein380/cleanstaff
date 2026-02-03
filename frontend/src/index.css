@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
 
 /* Professional B2B Cleaning Services Design System */
 
@@ -97,19 +97,49 @@ html {
 
 @layer components {
   .glass-morphism {
-    @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-xl;
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl;
   }
 
   .glass-card {
-    @apply bg-white/80 dark:bg-navy/80 backdrop-blur-lg border border-white/20 dark:border-white/10 shadow-lg;
+    @apply bg-white/70 dark:bg-navy/70 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-xl transition-all duration-300;
   }
 
   .premium-button {
-    @apply relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-teal/20 active:scale-95;
+    @apply relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-teal/20 active:scale-95 font-bold;
   }
 
   .text-balance {
     text-wrap: balance;
+  }
+
+  .gradient-hero {
+    background: var(--gradient-hero);
+    @apply relative overflow-hidden;
+  }
+
+  .gradient-hero::before {
+    content: '';
+    @apply absolute inset-0 bg-grid-white opacity-10;
+  }
+
+  .container-custom {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+  }
+
+  .section-padding {
+    @apply py-20 md:py-32;
+  }
+
+  .heading-xl {
+    @apply text-4xl md:text-5xl lg:text-7xl font-black tracking-tight leading-[1.1];
+  }
+
+  .heading-lg {
+    @apply text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight;
+  }
+
+  .heading-md {
+    @apply text-2xl md:text-3xl font-bold;
   }
 }
 

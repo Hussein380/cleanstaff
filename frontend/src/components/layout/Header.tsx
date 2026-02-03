@@ -23,7 +23,7 @@ export function Header() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-navy/90 backdrop-blur-lg border-b border-white/10 py-3 shadow-xl">
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-navy/80 backdrop-blur-xl border-b border-white/10 py-4">
       <nav className="container-custom">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -44,8 +44,8 @@ export function Header() {
                 key={item.name}
                 to={item.href}
                 className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${isActive(item.href)
-                    ? "text-teal bg-white/10"
-                    : "text-white/80 hover:text-white hover:bg-white/5"
+                  ? "text-teal bg-white/10"
+                  : "text-white/80 hover:text-white hover:bg-white/5"
                   }`}
               >
                 {item.name}
@@ -62,7 +62,7 @@ export function Header() {
               <Phone className="w-4 h-4 text-teal" />
               <span className="hidden xl:inline">+254 700 000 000</span>
             </a>
-            <Button asChild size="lg" className="premium-button px-6 h-12 font-black shadow-xl bg-white text-navy hover:bg-teal hover:text-white shadow-white/10 transition-all">
+            <Button asChild size="lg" className="premium-button px-6 h-11 bg-white text-navy hover:bg-teal hover:text-white transition-all border-0 ring-0">
               <Link to="/contact">Request Quote</Link>
             </Button>
           </div>
@@ -85,24 +85,24 @@ export function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-navy border-b border-white/10 overflow-hidden"
+            className="lg:hidden bg-navy/95 backdrop-blur-xl border-b border-white/10 overflow-hidden"
           >
-            <div className="container-custom py-6 space-y-2">
+            <div className="container-custom py-8 space-y-2">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`block px-4 py-3 rounded-xl text-base font-bold transition-all ${isActive(item.href)
-                      ? "text-teal bg-white/10"
-                      : "text-white/70 hover:text-white hover:bg-white/5"
+                  className={`block px-4 py-4 rounded-xl text-lg font-bold transition-all ${isActive(item.href)
+                    ? "text-teal bg-white/10"
+                    : "text-white/70 hover:text-white hover:bg-white/5"
                     }`}
                 >
                   {item.name}
                 </Link>
               ))}
               <div className="pt-6 border-t border-white/10">
-                <Button asChild className="w-full premium-button bg-white text-navy hover:bg-teal hover:text-white font-black h-14">
+                <Button asChild size="lg" className="w-full premium-button bg-white text-navy hover:bg-teal hover:text-white h-14 text-lg">
                   <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
                     Request a Quote
                   </Link>
