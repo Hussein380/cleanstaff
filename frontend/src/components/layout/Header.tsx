@@ -59,11 +59,11 @@ export function Header() {
               <Link to="/login">Sign In</Link>
             </Button>
             <a
-              href="tel:+254700000000"
+              href="tel:0723543460"
               className="flex items-center gap-2 text-sm font-bold transition-colors text-white/80 hover:text-white"
             >
               <Phone className="w-4 h-4 text-teal" />
-              <span className="hidden xl:inline">+254 700 000 000</span>
+              <span className="hidden xl:inline">0723543460</span>
             </a>
             <Button asChild size="lg" className="premium-button px-6 h-11 bg-white text-navy hover:bg-teal hover:text-white transition-all border-0 ring-0">
               <Link to="/contact">Request Quote</Link>

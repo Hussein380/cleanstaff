@@ -31,13 +31,25 @@ const createSendToken = (user, statusCode, res) => {
 
 exports.register = async (req, res) => {
     try {
+        // FIX: Only allow email and password.
+        // Role is ALWAYS 'client' for public registration.
+        // Admin roles must be assigned via DB or internal tool.
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({
+                status: 'fail',
+                message: 'Please provide email and password'
+            });
+        }
+
         const newUser = await User.create({
-            email: req.body.email,
-            password: req.body.password,
-            role: req.body.role,
-            profile: req.body.profile, // Optional linkage at creation
-            profileModel: req.body.profileModel
+            email,
+            password,
+            role: 'client', // Hardcoded for security
+            profileModel: 'Client' // Hardcoded for security
         });
+
         createSendToken(newUser, 201, res);
     } catch (err) {
         res.status(400).json({

@@ -22,10 +22,10 @@ export function CTASection() {
           className="max-w-5xl mx-auto glass-morphism rounded-[2.5rem] p-8 md:p-16 text-center border border-white/10 shadow-3xl"
         >
           <motion.div variants={fadeInUp} className="max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-5xl font-black text-white mb-6 tracking-tight leading-tight">
-              Ready to <span className="text-teal-light">Transform</span> Your Cleaning Operations?
+            <h2 className="text-3xl md:text-5xl font-black text-navy mb-6 tracking-tight leading-tight">
+              Ready to <span className="text-teal">Transform</span> Your Cleaning Operations?
             </h2>
-            <p className="text-lg md:text-xl text-white/70 mb-10 leading-relaxed">
+            <p className="text-lg md:text-xl text-navy/70 mb-10 leading-relaxed font-medium">
               Get in touch today for a free staffing consultation. We'll assess your needs
               and provide a tailored managed solution designed for your sector.
             </p>
@@ -48,11 +48,11 @@ export function CTASection() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="h-16 px-10 border-white/40 text-white hover:bg-white/20 glass-morphism text-lg font-bold border-2 transition-all"
+                className="h-16 px-10 border-white/40 text-navy hover:bg-white/80 glass-morphism text-lg font-bold border-2 transition-all shadow-xl"
               >
-                <a href="tel:+254700000000">
-                  <Phone className="mr-3 w-6 h-6" />
-                  +254 700 000 000
+                <a href="tel:0723543460">
+                  <Phone className="mr-3 w-6 h-6 text-teal" />
+                  0723543460
                 </a>
               </Button>
             </motion.div>
@@ -62,13 +62,13 @@ export function CTASection() {
               variants={fadeInUp}
               className="mt-12 pt-8 border-t border-white/10 flex flex-wrap justify-center gap-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-500"
             >
-              <div className="flex items-center gap-2 text-white font-bold tracking-tighter italic text-xl">
+              <div className="flex items-center gap-2 text-navy/40 font-bold tracking-tighter italic text-xl uppercase">
                 TRUSTED
               </div>
-              <div className="flex items-center gap-2 text-white font-bold tracking-tighter italic text-xl">
+              <div className="flex items-center gap-2 text-navy/40 font-bold tracking-tighter italic text-xl uppercase">
                 VETTED
               </div>
-              <div className="flex items-center gap-2 text-white font-bold tracking-tighter italic text-xl">
+              <div className="flex items-center gap-2 text-navy/40 font-bold tracking-tighter italic text-xl uppercase">
                 MANAGED
               </div>
             </motion.div>

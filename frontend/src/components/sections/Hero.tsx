@@ -73,7 +73,7 @@ export function Hero() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="h-14 px-8 text-base font-bold border-white/30 text-white hover:bg-white hover:text-navy rounded-lg transition-all"
+                className="h-14 px-8 text-base font-bold border-white/30 text-white hover:bg-white hover:text-navy rounded-lg transition-all bg-transparent"
               >
                 <Link to="/how-it-works">
                   How It Works
