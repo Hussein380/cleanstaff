@@ -7,7 +7,7 @@
         "backend"
     ],
     "scripts": {
-        "vercel-build": "cd frontend && npm ci && npm rebuild && npm run build"
+        "build": "cd frontend && npm ci && npm rebuild && npm run build"
     },
     "engines": {
         "node": ">=18.0.0"
