@@ -1,36 +1,71 @@
 const Client = require('../models/Client');
 const Job = require('../models/Job');
 
+/**
+ * Optimized getAllClients using MongoDB Aggregation Pipeline.
+ *
+ * Before: For each client, we ran 1 extra query to get their jobs/stats.
+ *         With 50 clients, that was 50+ database calls. SLOW!
+ *
+ * After:  A single aggregation query joins clients and jobs, and
+ *         calculates stats (activeJobs, assignedStaff) in the database.
+ *         Only 1 database call. FAST!
+ */
 exports.getAllClients = async (req, res) => {
     try {
-        const clients = await Client.lean().find().sort({ createdAt: -1 });
-
-        // Aggregate stats for each client
-        const clientsWithStats = await Promise.all(clients.map(async (client) => {
-            const jobs = await Job.find({ client: client._id }).select('status assignedStaff');
-
-            // Active Jobs: Not Started or In Progress
-            const activeJobsCount = jobs.filter(j => ['Not Started', 'In Progress', 'Urgent'].includes(j.status)).length;
-
-            // Unique Staff Assigned to Active Jobs
-            const staffSet = new Set();
-            jobs.forEach(j => {
-                if (['Not Started', 'In Progress', 'Urgent'].includes(j.status)) {
-                    j.assignedStaff.forEach(s => staffSet.add(s.toString()));
+        const clients = await Client.aggregate([
+            // Stage 1: Look up all jobs for each client
+            {
+                $lookup: {
+                    from: 'jobs', // The MongoDB collection name (lowercase, plural)
+                    localField: '_id',
+                    foreignField: 'client',
+                    as: 'jobs'
                 }
-            });
-
-            return {
-                ...client,
-                stats: {
-                    activeJobs: activeJobsCount,
-                    assignedStaff: staffSet.size,
-                    totalJobs: jobs.length
+            },
+            // Stage 2: Calculate stats for each client
+            {
+                $addFields: {
+                    stats: {
+                        totalJobs: { $size: '$jobs' },
+                        activeJobs: {
+                            $size: {
+                                $filter: {
+                                    input: '$jobs',
+                                    as: 'job',
+                                    cond: { $in: ['$$job.status', ['Not Started', 'In Progress', 'Urgent']] }
+                                }
+                            }
+                        },
+                        assignedStaff: {
+                            $size: {
+                                $reduce: {
+                                    input: {
+                                        $filter: {
+                                            input: '$jobs',
+                                            as: 'job',
+                                            cond: { $in: ['$$job.status', ['Not Started', 'In Progress', 'Urgent']] }
+                                        }
+                                    },
+                                    initialValue: [],
+                                    in: { $setUnion: ['$$value', '$$this.assignedStaff'] }
+                                }
+                            }
+                        }
+                    }
                 }
-            };
-        }));
+            },
+            // Stage 3: Remove the raw jobs array (we don't need it in the response)
+            {
+                $project: { jobs: 0 }
+            },
+            // Stage 4: Sort by creation date
+            {
+                $sort: { createdAt: -1 }
+            }
+        ]);
 
-        res.json(clientsWithStats);
+        res.json(clients);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

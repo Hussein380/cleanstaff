@@ -6,6 +6,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const { apiLimiter, authLimiter } = require('./middleware/security');
+const errorHandler = require('./middleware/errorHandler');
 const authRoutes = require('./routes/authRoutes');
 
 dotenv.config();
@@ -56,6 +57,9 @@ app.use('/api/client', require('./routes/clientRoutes'));
 app.get('/', (req, res) => {
     res.json({ message: 'Welcome to CleanStaff API' });
 });
+
+// Global Error Handler - MUST be at the end, after all routes
+app.use(errorHandler);
 
 // Start Server
 if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
