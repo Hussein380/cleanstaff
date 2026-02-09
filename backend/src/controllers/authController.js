@@ -91,3 +91,37 @@ exports.getMe = async (req, res, next) => {
         }
     });
 };
+
+exports.seedData = async (req, res) => {
+    try {
+        const User = require('../models/User');
+        
+        // Clear existing admin user if exists
+        await User.deleteMany({ email: 'admin@cleanstaff.com' });
+        
+        // Create Admin User
+        const admin = await User.create({
+            email: 'admin@cleanstaff.com',
+            password: 'password123',
+            passwordConfirm: 'password123',
+            role: 'admin',
+            profileModel: 'Admin'
+        });
+
+        res.status(201).json({
+            status: 'success',
+            message: 'Admin user created successfully',
+            data: {
+                user: {
+                    email: admin.email,
+                    role: admin.role
+                }
+            }
+        });
+    } catch (error) {
+        res.status(400).json({
+            status: 'fail',
+            message: error.message
+        });
+    }
+};
