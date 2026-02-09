@@ -55,6 +55,9 @@ export function Header() {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center gap-6">
+            <Button variant="ghost" asChild className="hidden lg:inline-flex text-white hover:text-white hover:bg-white/10 font-bold">
+              <Link to="/login">Sign In</Link>
+            </Button>
             <a
               href="tel:+254700000000"
               className="flex items-center gap-2 text-sm font-bold transition-colors text-white/80 hover:text-white"
@@ -101,6 +104,13 @@ export function Header() {
                   {item.name}
                 </Link>
               ))}
+              <Link
+                to="/login"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block px-4 py-4 rounded-xl text-lg font-bold text-white/70 hover:text-white hover:bg-white/5 transition-all"
+              >
+                Sign In
+              </Link>
               <div className="pt-6 border-t border-white/10">
                 <Button asChild size="lg" className="w-full premium-button bg-white text-navy hover:bg-teal hover:text-white h-14 text-lg">
                   <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>

@@ -1,39 +1,81 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+import axios from 'axios';
 
-export const apiFetch = async (endpoint: string, options: RequestInit = {}) => {
-    const response = await fetch(`${API_URL}${endpoint}`, {
-        ...options,
-        headers: {
-            'Content-Type': 'application/json',
-            ...options.headers,
-        },
-    });
+// Axios is already configured with BaseURL and Headers in AuthContext
+// We just need to use it here.
 
-    if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'API request failed');
-    }
-
-    return response.json();
+export const clientsApi = {
+    getAll: async () => {
+        const res = await axios.get('/client/all');
+        return res.data;
+    },
+    create: async (data: any) => {
+        const res = await axios.post('/client', data);
+        return res.data;
+    },
+    update: async (id: string, data: any) => {
+        const res = await axios.put(`/client/${id}`, data);
+        return res.data;
+    },
+    delete: async (id: string) => {
+        const res = await axios.delete(`/client/${id}`);
+        return res.data;
+    },
 };
 
+
 export const dashboardApi = {
-    getSummary: () => apiFetch('/dashboard/summary'),
-    getPriorityJobs: () => apiFetch('/dashboard/priority-jobs'),
+    getSummary: async () => {
+        const res = await axios.get('/dashboard/summary');
+        return res.data;
+    },
+    getPriorityJobs: async () => {
+        const res = await axios.get('/dashboard/priority-jobs');
+        return res.data;
+    },
 };
 
 export const jobsApi = {
-    getAll: (params?: string) => apiFetch(`/jobs${params ? `?${params}` : ''}`),
-    updateStatus: (id: string, data: any) => apiFetch(`/jobs/${id}/status`, {
-        method: 'PATCH',
-        body: JSON.stringify(data),
-    }),
+    getAll: async (params?: string) => {
+        const res = await axios.get(`/jobs${params ? `?${params}` : ''}`);
+        return res.data;
+    },
+    create: async (data: any) => {
+        const res = await axios.post('/jobs', data);
+        return res.data;
+    },
+    update: async (id: string, data: any) => {
+        const res = await axios.put(`/jobs/${id}`, data);
+        return res.data;
+    },
+    delete: async (id: string) => {
+        const res = await axios.delete(`/jobs/${id}`);
+        return res.data;
+    },
+    updateStatus: async (id: string, data: any) => {
+        const res = await axios.patch(`/jobs/${id}/status`, data);
+        return res.data;
+    },
 };
 
 export const staffApi = {
-    getAll: () => apiFetch('/staff'),
-    updateStatus: (id: string, status: string) => apiFetch(`/staff/${id}/status`, {
-        method: 'PATCH',
-        body: JSON.stringify({ status }),
-    }),
+    getAll: async () => {
+        const res = await axios.get('/staff');
+        return res.data;
+    },
+    create: async (data: any) => {
+        const res = await axios.post('/staff', data);
+        return res.data;
+    },
+    update: async (id: string, data: any) => {
+        const res = await axios.put(`/staff/${id}`, data);
+        return res.data;
+    },
+    delete: async (id: string) => {
+        const res = await axios.delete(`/staff/${id}`);
+        return res.data;
+    },
+    updateStatus: async (id: string, status: string) => {
+        const res = await axios.patch(`/staff/${id}/status`, { status });
+        return res.data;
+    },
 };

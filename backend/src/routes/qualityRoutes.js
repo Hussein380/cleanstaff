@@ -4,7 +4,11 @@ const qualityController = require('../controllers/qualityController');
 
 const upload = require('../middleware/upload');
 
-router.get('/stats', qualityController.getQualityStats);
-router.post('/submit', upload.array('images', 5), qualityController.submitInspection);
+const authMiddleware = require('../middleware/authMiddleware');
+
+router.use(authMiddleware.protect);
+
+router.get('/stats', authMiddleware.restrictTo('admin'), qualityController.getQualityStats);
+router.post('/submit', authMiddleware.restrictTo('admin', 'staff'), upload.array('images', 5), qualityController.submitInspection);
 
 module.exports = router;

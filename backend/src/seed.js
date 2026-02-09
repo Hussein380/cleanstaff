@@ -4,6 +4,7 @@ const Staff = require('./models/Staff');
 const Client = require('./models/Client');
 const Job = require('./models/Job');
 const Inventory = require('./models/Inventory');
+const User = require('./models/User');
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ const seedData = async () => {
         await Client.deleteMany({});
         await Job.deleteMany({});
         await Inventory.deleteMany({});
+        await User.deleteMany({});
 
         // Create Staff
         const staff = await Staff.create([
@@ -72,6 +74,15 @@ const seedData = async () => {
             { name: 'Glass Cleaner (5L)', category: 'Chemicals', site: 'Apartment Complex A', currentStock: 2, threshold: 5 },
             { name: 'Microfiber Towels', category: 'Equipment', site: 'School B', currentStock: 5, threshold: 10 }
         ]);
+
+        // Create Admin User
+        await User.create({
+            email: 'admin@cleanstaff.com',
+            password: 'password123',
+            passwordConfirm: 'password123',
+            role: 'admin',
+            profileModel: 'Admin'
+        });
 
         console.log('Seeding complete!');
         process.exit();
