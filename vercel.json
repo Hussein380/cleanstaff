@@ -3,6 +3,11 @@
     "outputDirectory": "frontend/dist",
     "installCommand": "npm install",
     "framework": null,
+    "functions": {
+        "api/index.js": {
+            "runtime": "@vercel/node@3"
+        }
+    },
     "rewrites": [
         {
             "source": "/api/(.*)",
