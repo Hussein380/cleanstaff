@@ -76,10 +76,15 @@ const seedData = async () => {
         ]);
 
         // Create Admin User
+        // Create Admin User
+        if (!process.env.ADMIN_EMAIL || !process.env.ADMIN_PASSWORD) {
+            throw new Error('ADMIN_EMAIL and ADMIN_PASSWORD must be set in environment variables');
+        }
+
         await User.create({
-            email: 'admin@cleanstaff.com',
-            password: 'password123',
-            passwordConfirm: 'password123',
+            email: process.env.ADMIN_EMAIL,
+            password: process.env.ADMIN_PASSWORD,
+            passwordConfirm: process.env.ADMIN_PASSWORD,
             role: 'admin',
             profileModel: 'Admin'
         });
