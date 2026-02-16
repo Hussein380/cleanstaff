@@ -33,7 +33,20 @@ mongoose.connect(process.env.MONGO_URI)
 
 // Middleware
 app.use(cors({
-    origin: ['https://cleanstaff.vercel.app', 'http://localhost:5173'],
+    origin: (origin, callback) => {
+        const allowedOrigins = [
+            'https://cleanstaff.vercel.app',
+            'http://localhost:5173',
+            'http://localhost:8080'
+        ];
+
+        // Allow Vercel preview deployments
+        if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true
 }));
 app.use(express.json({ limit: '10kb' })); // Body limit
